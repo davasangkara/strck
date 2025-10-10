@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Hasil Struk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+         background:#f6f7f8;margin:0;padding:24px;color:#222}
+    .wrap{max-width:1100px;margin:0 auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.06);padding:12px}
+    img{width:100%;border-radius:10px;display:block}
+    a.btn{display:inline-block;margin-top:8px;text-decoration:none;background:#111;color:#fff;padding:.5rem .8rem;border-radius:999px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Hasil Generate: <code>{{ ts }}</code></h2>
+    <p>Total file: {{ files|length }}</p>
+    <div class="grid">
+      {% for f in files %}
+      <div class="card">
+        <img loading="lazy" src="{{ url_for('serve_receipt', ts=ts, filename=f) }}" alt="{{ f }}">
+        <a class="btn" href="{{ url_for('serve_receipt', ts=ts, filename=f) }}" download>Download</a>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="margin-top:16px">
+      <a class="btn" href="{{ url_for('index') }}">Buat Lagi</a>
+    </div>
+  </div>
+</body>
+</html>
